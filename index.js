@@ -16,10 +16,6 @@ module.exports.TYPE_KEY = TYPE_KEY
 
 let eventBus, server, serverId
 
-// function isEncrypted(msg) {
-//   return typeof msg.value.content === 'string'
-// }
-
 const init = async (config) => {
   console.log('initializing rsf-ssbable')
   // add plugins
