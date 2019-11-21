@@ -4,7 +4,10 @@ const pull = require('pull-stream')
 const Server = require('ssb-server')
 const Config = require('ssb-config/inject')
 // ssb-test matches the name of ~/.ssb-test folder where the rest of the `config` is
-const ssbconfig = Config('ssb-test')
+const ssbconfig = Config('ssb-test', {
+  logging: { level: 'info' },
+  port: process.env.PORT
+})
 
 const STANDARD_EVENT_KEY = 'msg'
 module.exports.STANDARD_EVENT_KEY = STANDARD_EVENT_KEY
@@ -23,6 +26,7 @@ const init = async (config) => {
     .use(require('ssb-gossip'))
     .use(require('ssb-replicate'))
     .use(require('ssb-private'))
+    .use(require('ssb-logging'))
 
   server = Server(ssbconfig)
 

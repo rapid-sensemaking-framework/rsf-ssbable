@@ -4,7 +4,6 @@ init().then(() => {
   const tester = new SSBable('@LokfrMODq1nbyPNR5MrxmI2thhszC4pfCn8OsLwcxIs=.ed25519')
   tester.listen(message => {
     console.log('got a message!', message)
-    shutdown()
   })
   tester.speak('to myself')
 })
