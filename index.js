@@ -105,6 +105,14 @@ class SSBable extends EventEmitter {
   stopListening() {
     this.removeAllListeners()
   }
+
+  config() {
+    return {
+      type: TYPE_KEY,
+      id: this.id,
+      name: this.name
+    }
+  }
 }
 module.exports.SSBable = SSBable
 
