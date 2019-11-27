@@ -1,8 +1,12 @@
+require('dotenv').config()
 const EventEmitter = require('events')
 
 const pull = require('pull-stream')
-const Server = require('ssb-server')
+
+const SecretStack = require('secret-stack')
+const caps = require('ssb-caps')
 const Config = require('ssb-config/inject')
+
 // ssb-test matches the name of ~/.ssb-test folder where the rest of the `config` is
 const ssbconfig = Config('ssb-test', {
   logging: { level: 'info' },
@@ -22,18 +26,26 @@ let eventBus, server, serverId
 const init = async (config) => {
   console.log('initializing rsf-ssbable')
   // add plugins
-  Server
+  const createApp = SecretStack({ caps: { shs: Buffer.from(caps.shs, 'base64') } })
+    .use(require('ssb-db'))
     .use(require('ssb-gossip'))
     .use(require('ssb-replicate'))
     .use(require('ssb-private'))
     .use(require('ssb-logging'))
 
-  server = Server(ssbconfig)
+  server = createApp(ssbconfig)
 
   // cache the id of the server
   // for later use with encryption
-  server.whoami((err, { id }) => {
-    serverId = id
+  serverId = await new Promise((resolve, reject) => {
+    // .whoami comes from ssb-db
+    server.whoami((err, { id }) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve(id)
+    })
   })
 
   // a singleton that will act to transmit events between the server listener
@@ -88,14 +100,14 @@ class SSBable extends EventEmitter {
           { link: serverId } // remove self?
         ]
       },
-      [this.id, serverId], // those to encrypt for.. remove self?
-      (err, msg) => {
-        if (err) {
-          reject(err)
-          return
-        }
-        resolve()
-      })
+        [this.id, serverId], // those to encrypt for.. remove self?
+        (err, msg) => {
+          if (err) {
+            reject(err)
+            return
+          }
+          resolve()
+        })
     })
   }
 
