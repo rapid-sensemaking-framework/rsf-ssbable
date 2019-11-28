@@ -35,7 +35,9 @@ const init = async (config) => {
 
   server = createApp(ssbconfig)
 
-  console.log(ssbconfig)
+  // console.log(ssbconfig)
+  // console.log(ssbconfig.connections.outgoing)
+  console.log('ssbconfig.connections.incoming', ssbconfig.connections.incoming)
 
   // cache the id of the server
   // for later use with encryption
