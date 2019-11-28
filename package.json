@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aligned-block-file": "github:Connoropolous/aligned-block-file#4f4c7280b4aaef0e66e940ff7d53e81a64426f53",
+    "aligned-block-file": "github:Connoropolous/aligned-block-file#d775dd352b0b3ae11345231923d1df5166995390",
     "dotenv": "^8.2.0",
     "pull-stream": "^3.6.14",
     "secret-stack": "^6.3.1",
