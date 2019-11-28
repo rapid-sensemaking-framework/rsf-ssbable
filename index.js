@@ -35,6 +35,8 @@ const init = async (config) => {
 
   server = createApp(ssbconfig)
 
+  console.log(ssbconfig)
+
   // cache the id of the server
   // for later use with encryption
   serverId = await new Promise((resolve, reject) => {
