@@ -1,6 +1,9 @@
 {
   "name": "rsf-ssbable",
   "version": "0.0.1",
+  "engines": {
+    "node": "10.15.1"
+  },
   "description": "",
   "repository": {
     "type": "git",
