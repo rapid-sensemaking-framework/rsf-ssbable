@@ -1,9 +1,6 @@
 {
   "name": "rsf-ssbable",
   "version": "0.0.1",
-  "engines": {
-    "node": "10.15.1"
-  },
   "description": "",
   "repository": {
     "type": "git",
@@ -11,13 +8,13 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=* node client-ex.js",
-    "test": "PORT=8009 DEBUG=* node client-ex.js"
+    "start": "node client-ex.js",
+    "test": "PORT=8009 node client-ex.js",
+    "test-debug": "PORT=8009 DEBUG=* node client-ex.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aligned-block-file": "github:Connoropolous/aligned-block-file#d775dd352b0b3ae11345231923d1df5166995390",
     "dotenv": "^8.2.0",
     "pull-stream": "^3.6.14",
     "secret-stack": "^6.3.1",
